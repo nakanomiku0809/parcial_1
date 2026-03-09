@@ -1,0 +1,24 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+
+public static void crearVendedor(Vendedor vendedor) 
+throws IOException {
+    FileWriter fw = new FileWriter("vendedores.csv", true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    bw.write(vendedor.toString());
+    bw.newLine();
+    bw.close();
+}
+
+public static List<vendedor> leerVendedores() throws IOException {
+    List<vededor> lista = new ArrayList<>();
+    Scanner sc = new Scanner(new File("vendedores.csv"));
+    while (sc.hasNextLine()) {
+        String[] datos = sc.nextLine().split(",");
+        lista.add(new Vendedor(Integer.parseInt(datos[0]),datos[1],datos[2]));
+    }
+    sc.close();
+    return lista;
+}
